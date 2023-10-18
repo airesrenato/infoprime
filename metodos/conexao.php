@@ -1,5 +1,5 @@
 <?php
-$link = new mysqli('127.0.0.1', 'root', '', 'rolloutd');
+$link = new mysqli('127.0.0.1', 'root', '', 'sistemaERP');
 if ($link->connect_error) 
 {
   die('Erro na Conex�o (' . $link->connect_errno . ') ' . $link->connect_error);

@@ -2,37 +2,28 @@
 
     class OrdemServico {
         private $idOrdemServico;
-        private $Nome;
-        private $Empresa;
         private $Descricao;
+        private $Solicitante;
+        private $ContatoSolicitante;
+        private $Status;
         private $idUsuario;
-        private $idVeiculo;
+        private $idLider;
 
-        public function __construct($_idOrdemServico,$_Nome,$_Empresa,$_Descricao,$_idUsuario,$_idVeiculo){
+        function __construct($_idOrdemServico,$_Descricao,$_Solicitante,$_ContatoSolicitante,$_Status,$_idUsuario,$_idLider){
             $this->idOrdemServico = $_idOrdemServico;
-            $this->Nome = $_Nome;
-            $this->Empresa = $_Empresa;
             $this->Descricao = $_Descricao;
+            $this->Solicitante = $_Solicitante;
+            $this->ContatoSolicitante = $_ContatoSolicitante;
+            $this->Status = $_Status;
             $this->idUsuario = $_idUsuario;
-            $this->idVeiculo = $_idVeiculo;
+            $this->idLider = $_idLider;
         }
-
+        
         public function GetidOrdemServico():int{
             return $this->idOrdemServico;
         }
-      
-        public function GetNome():string{
-            return $this->Nome;
-        }
-
-        public function SetNome($_Nome):void{
-            $this->Nome = $_Nome;
-        }
-        public function GetEmpresa():string{
-            return $this->Empresa;
-        }
-        public function SetEmpresa($_Empresa):void{
-            $this->Empresa = $_Empresa;
+        public function SetidOrdemServico($_idOrdemServico):void{
+            $this->idOrdemServico = $_idOrdemServico;
         }
         public function GetDescricao():string{
             return $this->Descricao;
@@ -40,18 +31,46 @@
         public function SetDescricao($_Descricao):void{
             $this->Descricao = $_Descricao;
         }
+        public function GetSolicitante():string{
+            return $this->Solicitante;
+        }
+        public function SetSolicitante($_Solicitante):void{
+            $this->Solicitante = $_Solicitante;
+        }
+        public function GetContatoSolicitante():string{
+            return $this->ContatoSolicitante;
+        }
+        public function SetContatoSolicitante($_ContatoSolicitante):void{
+            $this->ContatoSolicitante = $_ContatoSolicitante;
+        }
+        public function GetStatus():string{
+            return $this->Status;
+        }
+        public function SetStatus($_Status):void{
+            $this->Status = $_Status;
+        }
         public function GetidUsuario():int{
             return $this->idUsuario;
         }
         public function SetidUsuario($_idUsuario):void{
             $this->idUsuario = $_idUsuario;
         }
-        public function GetidVeiculo():int{
-            return $this->idVeiculo;
+        public function GetidLider():int{
+            return $this->idLider;
         }
-        public function SetidVeiculo($_idVeiculo):void{
-            $this->idVeiculo = $_idVeiculo;
+        public function SetidLider($_idLider):void{
+            $this->idLider = $_idLider;
         }
+        public function InsereOrdemServico($link){
+            $query="INSERT INTO ordemServico VALUES(NULL,'".$this->Descricao."','".$this->Solicitante."','".$this->ContatoSolicitante."','".$this->Status."',".$this->idUsuario.",".$this->idLider.")";
+            $link->query($query) or die ($link->error);
+            $this->idOrdemServico = $link->insert_id;
+        }
+        public function DefineLider($link){
+            $query="UPDATE OrdemServico SET idLider = $this->idLider WHERE idOrdemServico = $this->idOrdemServico";
+            $link->query($query) or die($link->error);
+        } 
+
     }
 
 ?>

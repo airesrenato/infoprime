@@ -4,15 +4,15 @@
             <li class="header">Painel</li>
             <li class="">
                 <?php  
-                    echo "<a href='http://localhost/infoprime/erp'>";
+                    echo "<a href='http://localhost/infoprime/erp/index.php'>";
                 ?>
                 <i class="material-icons">home</i>
                 <span>Página Inicial</span>
                 </a>
             </li>
-            <li>
+            <!--<li>
                 <?php  
-                    echo "<a href='http://localhost/infoprime/erp/pages/tables/verOrdemServico.php'>";
+                    //echo "<a href='http://localhost/infoprime/erp/pages/tables/verOrdemServico.php'>";
                 ?>
                 <i class="material-icons">assignment</i>
                 <span>Ordens de Serviço</span>
@@ -20,14 +20,14 @@
             </li>
             <li>
                 <?php  
-                    echo "<a href='http://localhost/infoprime/erp/pages/tables/verColaboradores.php'>";
+                    //echo "<a href='http://localhost/infoprime/erp/pages/tables/verColaboradores.php'>";
                 ?>
                 <i class="material-icons">group</i>
                 <span>Colaboradores</span>
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);" class="menu-toggle" data-toggle="collapse">
+                <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">directions_car</i>
                     <span>Viagens</span>
                 </a>
@@ -35,24 +35,24 @@
                     <li class="">
 
                         <?php  
-                            echo "<a href='http://localhost/infoprime/erp/pages/tables/verViagens.php'>Viagens</a>";
+                           // echo "<a href='http://localhost/infoprime/erp/pages/tables/verViagens.php'>Viagens</a>";
                         ?>
                                 
                     </li>
                     <li>
                         <?php  
-                            echo "<a href='http://localhost/infoprime/erp/pages/tables/verMotoristas.php'>Motoristas</a>";
+                          //  echo "<a href='http://localhost/infoprime/erp/pages/tables/verMotoristas.php'>Motoristas</a>";
                         ?>
                     </li>
                     <li>
                         <?php  
-                            echo "<a href='http://localhost/infoprime/erp/pages/tables/verVeiculos.php'>Veículos</a>";
+                           // echo "<a href='http://localhost/infoprime/erp/pages/tables/verVeiculos.php'>Veículos</a>";
                         ?>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li>
-                <a href="javascript:void(0);" class="menu-toggle" data-toggle="collapse">
+                <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">local_atm</i>
                     <span>Gastos</span>
                 </a>
@@ -65,10 +65,10 @@
                             </a>
                     </li>
                     <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle" data-toggle="collapse" role="button">
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <span>Cartões</span>
                         </a>
-                        <ul class="ml-menu" data-toggle="collapse">
+                        <ul class="ml-menu">
                             <li class="">
                                 <?php  
                                     echo "<a href='#'>Gold</a>";
@@ -82,7 +82,7 @@
                         </ul>            
                     </li>
                     <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle" data-toggle="collapse" role="button">
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <span>Departamentos</span>
                         </a>
                         <ul class="ml-menu">
@@ -119,7 +119,7 @@
                         </ul>            
                     </li>
                     <li class="">
-                        <a href="javascript:void(0);" class="menu-toggle" data-toggle="collapse">
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <span>Plano de Contas</span>
                         </a>
                         <ul class="ml-menu">
@@ -139,8 +139,8 @@
                                 ?>
                             </li>
                         </ul>
-                    </li>                         
-                </ul>
+                    </li>                       
+                </ul>  
             </li>
         </ul>
     </div>                           

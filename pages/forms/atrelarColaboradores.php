@@ -1,15 +1,15 @@
 <?php
     session_start();
     require_once "../../metodos/seguranca.php";
+    require_once "../../metodos/conexao.php";
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Cadastrar Veiculo</title>
+    <title>Atrelar Colaboradores</title>
 
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
@@ -57,25 +57,14 @@
 
 <body class="theme-red">
     <!-- Page Loader -->
-    <div class="page-loader-wrapper">
-        <div class="loader">
-            <div class="preloader">
-                <div class="spinner-layer pl-red">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-            </div>
-            <p>Aguarde Um Momento...</p>
-        </div>
-    </div>
+  
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    
+    <!-- #END# Search Bar -->
     <!-- Top Bar -->
         <?php
             include_once"../../topBar.php";
@@ -96,67 +85,74 @@
             <!-- #Menu -->
             <!-- Footer -->
             <?php
-            //    include_once"../../footer.php";
+                include_once"../../footer.php";
             ?>
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+    
+        <!-- #END# Right Sidebar -->
     </section>
 
     <section class="content">
         <div class="container-fluid">
+            <div class="block-header">
+                <h2>Faça o atrelamento de um ou mais Colaboradores</h2>
+            </div>
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Cadastrar Veículo
+                                Atrelar colaborador a OS
+                                
                             </h2>
                         </div>
                         <div class="body">
-                            <form method="post" action="#" enctype="multipart/form-data">
+                        <form method="post" action="../../metodos/inserirColaboradorOS.php" enctype="multipart/form-data" >
+                            <div class="row clearfix">
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Marca</b> 
+                                        <b>Colaboradores</b>
                                     </p>
+                                    <select class="form-control show-tick" multiple="multiple" name="colaboradores[]" required>
+                                        <?php 
+                                           // $query = "SELECT * FROM usuario where idMotorista not in (SELECT m.idmotorista FROM Motorista m INNER JOIN viagemmotorista vm on m.idMotorista = vm.idMotorista inner join viagem v on vm.idViagem = v.idViagem where v.idViagem = ".$_GET['idViagem']." );";
+                                           $query = "SELECT * FROM usuario WHERE acesso = 'Colaborador'";
+                                           $resultado = $link->query($query) or die($link->error);
+                                            while($linha = $resultado->fetch_array()){
+                                                echo "<option value='".$linha["idUsuario"]."'> ".$linha["Nome"]."</option>";
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control date" name="Marca" placeholder="FIAT" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <p>
-                                        <b>Modelo</b> 
-                                    </p>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control date" name="Modelo" placeholder="Uno" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <p>
-                                        <b>Placa</b> 
-                                    </p>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control date" name="Placa" placeholder="" required>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                                <input type="hidden" value=<?php echo $_GET['idordemServico'] ?> name="idordemServico"> 
                                 <input type="submit" class="btn btn-primary m-t-15 waves-effect" name="Cadastrar" value="Cadastrar">
                             </form>
+
+                                <div class="row clearfix">
+                                    
+                                </div>
+                                
+                    
+                        </div>
+
+
                         </div>
                     </div>
                 </div>
-            <div class="row clearfix">
+            </div>
+            <!-- #END# Multi Select -->
+
+            
+            <!-- Advanced Select -->
+         
+            <!-- #END# Advanced Select -->
+            <!-- Input Slider -->
+           
+            <!-- #END# Input Slider -->
         </div>
     </section>
 

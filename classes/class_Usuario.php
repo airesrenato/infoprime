@@ -8,8 +8,8 @@
         private $Telefone;
 
 
-        public function __construct($_idUsuario, $Login, $Senha, $Nome, $Acesso, $Telefone){
-            $this->idUsuario = $_idUsusario;
+        public function __construct($_idUsuario, $_Login, $_Senha, $_Nome, $_Acesso, $_Telefone){
+            $this->idUsuario = $_idUsuario;
             $this->Login = $_Login;
             $this->Senha = $_Senha;
             $this->Nome  = $_Nome;
@@ -51,7 +51,16 @@
         public function SetTelefone($_Telefone){
             $this->Telefone = $_Telefone;
         }
-        
+        public function Verificar($link){
+            $query ="SELECT * FROM Usuario WHERE Login like '".$this->Login."' AND Senha LIKE '".$this->Senha."'";
+
+			$resultado = $link->query($query) or die ($link->error);
+            if($resultado->num_rows == 1){
+                return TRUE;	
+            }else{
+                return FALSE;
+            }
+        }
 
 
 

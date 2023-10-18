@@ -1,6 +1,7 @@
 ﻿<?php
     session_start();
-    require_once"./metodos/seguranca.php";
+    require_once "./metodos/seguranca.php";
+    $host = $_SERVER['HTTP_HOST'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Infoprime</title>
+    <title><?php echo $host; ?></title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -59,7 +60,7 @@
     <!-- #END# Overlay For Sidebars -->
     <!-- Top Bar -->
     <?php
-        include_once"topBar.php";
+        include_once "topBar.php";
     ?>
     <!-- #Top Bar -->
     <section>
@@ -67,17 +68,30 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
                 <?php
-                    include_once"userInfo.php";
+                    include_once "userInfo.php";
                 ?>
             <!-- #User Info -->
             <!-- Menu -->
                 <?php
-                    include_once"menu.php";
+                    if($_SESSION['Acesso']=='Admin'){
+                        echo '<b> Administrador </b>';
+                        include_once "menu.php";
+                    }elseif ($_SESSION['Acesso']=='Gestor') {
+                        echo '<b> Gestor </b>';
+                        include_once "menuGestor.php";
+                    }elseif ($_SESSION['Acesso']=='Colaborador') {
+                        echo '<b> Colaborador </b>';
+                        include_once "menuLider.php";
+                    }elseif ($_SESSION['Acesso']=='Financeiro') {
+                        echo '<b> Financeiro </b>';
+                        include_once "menuFinanceiro.php";
+                    }
+                    
                 ?>
             <!-- #Menu -->
             <!-- Footer -->
                 <?php
-                    //include_once"footer.php";
+                    include_once "footer.php";
                 ?>
             <!-- #Footer -->
         </aside>
@@ -88,104 +102,13 @@
         <div class="container-fluid">
             <div class="block-header">
                 <h2>DASHBOARD</h2>
+
             </div>
 
-            <!-- Widgets -->
-            <div class="row clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-pink hover-expand-effect">
-                        <div class="icon">
-                            <?php
-                                echo "<a href='http://$host/infoprime/rolloutd/pages/tables/verEquipamentos.php'>";
-                            ?>
-                         <i class="material-icons">playlist_add_check</i>
-                        </a>
-                        </div>
-                        <div class="content">
-                            <div class="text">Equipamentos</div>
-                            <div class="number count-to" data-from="0" data-to="<?php
-                                $mysqli = new mysqli('127.0.0.1','root', '', 'rolloutd');
-                                $query = $mysqli->prepare('SELECT * FROM equipamento');
-                                $query->execute();
-                                $query->store_result();
-                                $rows = $query->num_rows;
-                                echo $rows;
-                                 ?>" data-speed="15" data-fresh-interval="20">
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-cyan hover-expand-effect">
-                        <div class="icon">
-                            <?php
-                                echo "<a href='http://$host/infoprime/rolloutd/pages/tables/verAcessorios.php'>";
-                            ?>
-                          <i class="material-icons">help</i></a>
-                        </div>
-                        <div class="content">
-                            <div class="text">Acessórios</div>
-                            <div class="number count-to" data-from="0" data-to="<?php
-                                $mysqli = new mysqli('localhost','root', '', 'rolloutd');
-                                $query = $mysqli->prepare('SELECT * FROM acessorio');
-                                $query->execute();
-                                $query->store_result();
-                                $rows = $query->num_rows;
-                                echo $rows;
-                                ?>" data-speed="15" data-fresh-interval="20"></div> 
-                            </div>
-                    </div>
-                </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box bg-light-green hover-expand-effect">
-                        <div class="icon">
-                            <?php
-                                echo "<a href='http://$host/infoprime/rolloutd/pages/tables/verAvarias.php'>";
-                            ?>
-                            <i class="material-icons">forum</i>
-                        </a>
-                        </div>
-                        <div class="content">
-                            <div class="text">Avarias</div>
-                            <div class="number count-to" data-from="0" data-to="<?php
-                                $mysqli = new mysqli('localhost','root', '', 'rolloutd');
-                                $query = $mysqli->prepare('SELECT * FROM avaria');
-                                $query->execute();
-                                $query->store_result();
-                                $rows = $query->num_rows;
-                                echo $rows;
-                                 ?>" data-speed="15" data-fresh-interval="20">
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="info-box bg-orange hover-expand-effect">
-                        <div class="icon">
-                            <?php
-                                echo "<a href='http://10.4.3.150:8080/infoprime/rolloutd/pages/tables/verAtendimentos.php'>";
-                            ?>
-                            <i class="material-icons">person_add</i>
-                        </a>
-                        </div>
-                        <div class="content">
-                            <div class="text">Atendimentos</div>
-                            <div class="number count-to" data-from="0" data-to="<?php
-                                $mysqli = new mysqli('localhost','root', '', 'rolloutd');
-                                $query = $mysqli->prepare('SELECT * FROM atendimento');
-                                $query->execute();
-                                $query->store_result();
-                                $rows = $query->num_rows;
-                                echo $rows;
-                                 ?>" data-speed="15" data-fresh-interval="20">
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-                    <!-- #END# Widgets -->
+            <div>
+                <?php
+                   // include_once "morris.php";
+                ?>
             </div>
         </div>
     </section>

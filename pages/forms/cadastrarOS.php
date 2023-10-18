@@ -1,7 +1,11 @@
 <?php
     session_start();
-    require_once "../../metodos/seguranca.php";
+    require_once "../../metodos/conexao.php";
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Cadastrar Veiculo</title>
+    <title>Criar OS</title>
 
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
@@ -96,7 +100,7 @@
             <!-- #Menu -->
             <!-- Footer -->
             <?php
-            //    include_once"../../footer.php";
+               // include_once"../../footer.php";
             ?>
             <!-- #Footer -->
         </aside>
@@ -110,47 +114,49 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Cadastrar Veículo
+                                Criar Ordem de Serviço
                             </h2>
                         </div>
                         <div class="body">
-                            <form method="post" action="#" enctype="multipart/form-data">
+                            <form method="post" action="../../metodos/insereOrdemServico.php" enctype="multipart/form-data">
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Marca</b> 
+                                        <b>Descrição</b> 
                                     </p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control date" name="Marca" placeholder="FIAT" required>
+                                            <input type="text" class="form-control date" name="Descricao" placeholder="Manutenção, 5S, Formatação..." required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Modelo</b> 
+                                        <b>Empresa</b> 
                                     </p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control date" name="Modelo" placeholder="Uno" required>
+                                            <input type="text" class="form-control date" name="Solicitante" placeholder="Votorantim, Gerdau, Sulina...." required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Placa</b> 
+                                        <b>Colaborador Solicitante</b> 
                                     </p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control date" name="Placa" placeholder="" required>
+                                            <input type="text" class="form-control date" name="ContatoSolicitante" placeholder="Colaborador que solicitou" required>
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="idUsuario" value="<?php echo $_SESSION['idUsuario'];  ?>">
+                           
                                 <input type="submit" class="btn btn-primary m-t-15 waves-effect" name="Cadastrar" value="Cadastrar">
                             </form>
                         </div>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once "../../metodos/seguranca.php";
+    //require_once "../../metododos/seguranca.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Cadastrar Veiculo</title>
+    <title>Cadastrar Gasto</title>
 
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
@@ -56,7 +56,7 @@
 </head>
 
 <body class="theme-red">
-    <!-- Page Loader -->
+    <!-- Page Loader 
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -72,7 +72,7 @@
             <p>Aguarde Um Momento...</p>
         </div>
     </div>
-    <!-- #END# Page Loader -->
+     #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
@@ -96,7 +96,7 @@
             <!-- #Menu -->
             <!-- Footer -->
             <?php
-            //    include_once"../../footer.php";
+               // include_once"../../footer.php";
             ?>
             <!-- #Footer -->
         </aside>
@@ -110,47 +110,123 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Cadastrar Veículo
+                                Cadastrar Gasto <?php// echo $_SESSION['idordemServico']; ?>
                             </h2>
                         </div>
                         <div class="body">
-                            <form method="post" action="#" enctype="multipart/form-data">
+                            <form method="post" action="../../metodos/insereGastos.php" enctype="multipart/form-data">
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Marca</b> 
+                                        <b>Categoria</b> 
+                                    </p>
+                                </div>
+                                    <select class="form-control show-tick" name="Categoria" data-live-search="true">
+                                        <?php
+                                           // $query = "SELECT * FROM equipamento";
+                                            //$resultado = $link->query($query) or die($link->error);
+                                           // while($linha = $resultado->fetch_array()){
+                                           //     echo "<option value='".$linha["idEquipamento"]."'> ".$linha["VC"]."</option>";
+                                           // }
+                                        ?>
+                                        <option value='Alimentação'> Alimentação</option>
+                                        <option value='Pedágio'> Pedágio</option>
+                                        <option value='Combustível'> Combustível</option>
+                                        <option value='Estacionamento'> Estacionamento</option>
+                                        <option value='Passagem'> Passagem</option>
+                                        <option value='Passagem Aérea'> Passagem Aérea</option>
+                                        <option value='Aluguel de carro'> Aluguel de carro</option>
+                                        <option value=''> Despesa</option>
+                                    </select>
+                                    
+                                <div class="col-md-12">
+                                    <p>
+                                        <b>Data</b> 
                                     </p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control date" name="Marca" placeholder="FIAT" required>
+                                            <input type="text" class="form-control date" name="DiaGasto" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Modelo</b> 
-                                    </p>
+                                        <b>Fornecedor</b> 
+                                    </p>    
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control date" name="Modelo" placeholder="Uno" required>
+                                            <input type="texte" class="form-control date" name="Fornecedor" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <p>
-                                        <b>Placa</b> 
+                                        <b>Departamento</b> 
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">    
+                                        <div class="form-line">
+                                            <input type="text" class="form-control date" name="Departamento" placeholder="Departamento" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <b>Compra</b> 
                                     </p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control date" name="Placa" placeholder="" required>
+                                            <input type="text" class="form-control date" name="Compra" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <b>Valor</b> 
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control date" name="Valor" placeholder="Valor" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <b>OBS</b> 
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control date" name="Obs" placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p>
+                                        <b>Nota</b> 
+                                    </p>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">person</i>
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="file" name="arquivo" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                    $idordemServiço = $_SESSION['idordemServico'];
+                                ?>
+                                <input type="hidden" name="idordemServico" value="<?php echo $idordemServiço; ?>">
                                 <input type="submit" class="btn btn-primary m-t-15 waves-effect" name="Cadastrar" value="Cadastrar">
                             </form>
                         </div>
@@ -205,3 +281,7 @@
 </body>
 
 </html>
+<?php
+ 
+
+?>

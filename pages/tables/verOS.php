@@ -1,16 +1,21 @@
+<?php?>
+
 <?php
     session_start();
-   // require_once "../../metodos/seguranca.php";
-    require_once"../../metodos/conexao.php";
+    require_once "../../metodos/conexao.php";
     $host  = $_SERVER['HTTP_HOST'];
+  //  require_once "../../metodos/seguranca.php";
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Veículos</title>
+    <title>Ordens de Serviço</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -39,7 +44,7 @@
 
 <body class="theme-red">
     <!-- Page Loader 
-   <div class="page-loader-wrapper">
+    <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
                 <div class="spinner-layer pl-red">
@@ -51,17 +56,40 @@
                     </div>
                 </div>
             </div>
-            <p>Um Momento...</p>
+            <p>Please wait...</p>
         </div>
-    </div> 
+    </div>
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
-   <!-- Top Bar -->
-        <?php
-            include_once"../../topBar.php";
-        ?>
+    <!-- Search Bar -->
+    
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="#">ERP - INFOPRIME</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                   
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
@@ -73,27 +101,51 @@
             <!-- #User Info -->
             <!-- Menu -->
             <?php
-                include_once"../../menuGestor.php";
+                include_once"../../menu.php";
             ?>
             <!-- #Menu -->
-             <!-- Footer -->
-            <?php
-               // include_once"../../footer.php";
-            ?>
+            <!-- Footer -->
+            
             <!-- #Footer -->
         </aside>
-        <!-- #END# Left Sidebar -->      
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+       
+        <!-- #END# Right Sidebar -->
     </section>
 
     <section class="content">
-        <div class="container-fluid"> 
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                    <?php
+
+                            //Ordens de Serviço abertas por você <?php echo $_SESSION['Nome']; 
+
+                  
+                        if($_SESSION['Acesso'] == 'Colaborador'){
+                            echo "Ordens de Serviço em que você está ".$_SESSION['Nome'].".";
+                        }if($_SESSION['Acesso'] == 'Gestor'){
+                            echo "Ordens de Serviço abertas por você ".$_SESSION['Nome'].".";
+                        }
+
+
+                    ?>
+
+
+                    <small>Taken from <a href="https://datatables.net/" target="_blank">datatables.net</a></small>
+                </h2>
+            </div>
+            <!-- Basic Examples -->
+            
+            <!-- #END# Basic Examples -->
             <!-- Exportable Table -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Veículos
+                                Ordens em aberto
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -101,9 +153,9 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
-                                        <?php  
-                                            echo"    <li><a href='http://$host/infoprime/rolloutd/pages/forms/cadastrarVeiculo.php'>Cadastrar Veiculo</a></li>";
-                                        ?>
+                                        <li><a href="http://localhost/infoprime/erp/pages/forms/cadastrarOS.php">Criar ordem de serviço</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -113,29 +165,61 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Modelo</th>
-                                            <th>Marca</th>
-                                            <th>Placa</th> 
+                                            <th>Empresa</th>
+                                            <th>Solicitante</th>
+                                            <th>Status</th>
+                                            <th>Opções</th>
+
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Modelo</th>
-                                            <th>Marca</th>
-                                            <th>Placa</th>
+                                            <th>Empresa</th>
+                                            <th>Solicitante</th>
+                
+                                            <th>Status</th>
+                                            <th>Opções</th>
+
+                                          
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php
-                                            $query="SELECT * FROM Veiculo";
+                                    <?php
+
+
+                                        if($_SESSION['Acesso']=='Gestor'){
+
+
+                                            $query="SELECT * FROM ordemServico WHERE idUsuario = ".$_SESSION['idUsuario']."";
                                             $resultado=$link->query($query) or die ($link->error);
                                             while($linha = $resultado->fetch_array()){
                                                 echo"  <tr>".
-                                                    "<td>".$linha["Modelo"]."</td>
-                                                    <td>".$linha["Marca"]."</td>
-                                                    <td>".$linha["Placa"]."</td>
+                                                    "<td>".$linha["Solicitante"]."</td>
+                                                    <td>".$linha["ContatoSolicitante"]."</td>
+                                                    
+                                                    <td>".$linha["Status"]."</td>
+                                                   
+                                                    
+                                                    <td> <a href='http://$host/infoprime/erp/pages/ui/DetalhesOS.php?idordemServico=".$linha["idordemServico"]."'>Detalhes</td>
                                                 </tr>";
                                             }
+
+                                        }
+                                        if($_SESSION['Acesso']=='Colaborador'){
+                                           $query="SELECT * FROM ordemServico os INNER JOIN usuario_has_ordemservico uos ON os.idordemServico = uos.idordemServico WHERE uos.idUsuario  = ".$_SESSION['idUsuario']."";
+                                           $resultado=$link->query($query) or die ($link->error);
+                                           while($linha = $resultado->fetch_array()){
+                                               echo"  <tr>".
+                                                   "<td>".$linha["Solicitante"]."</td>
+                                                   <td>".$linha["ContatoSolicitante"]."</td>
+                                                   
+                                                   <td>".$linha["Status"]."</td>
+                                                  
+                                                   
+                                                   <td> <a href='http://$host/infoprime/erp/pages/ui/DetalhesOS.php?idordemServico=".$linha["idordemServico"]."'>Detalhes</td>
+                                               </tr>";
+                                           }
+                                        }
                                         ?> 
                                     </tbody>
                                 </table>
@@ -144,6 +228,9 @@
                     </div>
                 </div>
             </div>
+            <!-- #END# Exportable Table -->
+            <!-- Exportable Table -->
+            
             <!-- #END# Exportable Table -->
         </div>
     </section>

@@ -1,5 +1,5 @@
 ﻿<?php
-    include_once'../../conexao.php';
+    include_once'../../metodos/conexao.php';
     session_start();
 ?>
 <!DOCTYPE html>
@@ -33,18 +33,18 @@
     <div class="login-box">
         <div class="logo">
             <a href="javascript:void(0);">INFOPRIME<b>RS</b></a>
-            <small>SISTEMA DE GERENCIAMENTO DE ATIVOS</small>
+            <small></small>
         </div>
         <div class="card">
             <div class="body">
-            <form id="sign_in" method="POST" action="../../Login.php">
+            <form id="sign_in" method="POST" action="../../metodos/Login.php">
                     <div class="msg">Entre com seu usuário e sua senha.</div>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="Nome" placeholder="Usuario" required autofocus>
+                            <input type="text" class="form-control" name="Login" placeholder="Usuario" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
